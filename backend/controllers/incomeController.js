@@ -27,13 +27,31 @@ exports.addIncome = async(req, res) => {
     }catch{
         res.status(500).json({message: "Server Error"});
     }
-}
+};
 
 //Get All Income Sources
-exports.getAllIncome = async(req, res) => {}
+exports.getAllIncome = async(req, res) => {
+    const userId = req.user.id;
+
+    try{
+        const income = await Income.find({userId}).sort({date: -1});
+        res.json(income);
+    }catch{
+        res.status(500).json({message: "Server error"});
+    }
+};
 
 //Delete Income Source
-exports.deleteIncome = async(req, res) => {}
+exports.deleteIncome = async(req, res) => {
+    try{
+        await Income.findByIdAndDelete(req.params.id);
+        res.json({message: "Income deleted successfully"});
+    }catch(err){
+        res.status(500).json({message: "Server error"});
+    }
+;}
 
 //download Excel
-exports.downloadIncomeExcel = async(req, res) => {}
+exports.downloadIncomeExcel = async(req, res) => {
+    
+}
