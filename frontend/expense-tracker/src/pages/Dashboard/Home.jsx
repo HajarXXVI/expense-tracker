@@ -8,13 +8,15 @@ import InfoCard from "../../components/cards/InfoCard";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import {IoMdCard} from "react-icons/io";
 import {addThousandsSeperator} from "../../utils/helper";
+import RecentTransactions from "../../components/Dashboard/RecentTransactions";
+
 
 const Home = () => {
   useUserAuth();
 
   const navigate = useNavigate();
 
-  const [dashboardData, setdashboardData] = useState();
+  const [dashboardData, setDashboardData] = useState();
   const [loading, setLoading] = useState();
 
   const fetchDashboardData =async () => {
@@ -28,7 +30,7 @@ const Home = () => {
       );
 
       if(response.data){
-        setdashboardData(response.data);
+        setDashboardData(response.data);
       }
     } catch (error){
       console.log("Something went wrong. Please try again.", error);
@@ -51,6 +53,27 @@ const Home = () => {
               label = "Total Balance"
               value = {addThousandsSeperator(dashboardData?. totalBalance || 0)}
               color = "bg-primary"
+            />
+
+            <InfoCard
+              icon = {<LuWalletMinimal/>}
+              label = "Total Income"
+              value = {addThousandsSeperator(dashboardData?. totalIncome || 0)}
+              color = "bg-orange-500"
+            />
+
+            <InfoCard
+              icon = {<LuHandCoins/>}
+              label = "Total Expense"
+              value = {addThousandsSeperator(dashboardData?. totalExpense || 0)}
+              color = "bg-red-500"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <RecentTransactions
+              transactions = {dashboardData?.recentTransactions}
+              onSeeMore = {() => navigate("/expense")}
             />
           </div>
         </div>
