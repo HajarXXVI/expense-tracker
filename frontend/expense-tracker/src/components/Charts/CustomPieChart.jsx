@@ -1,7 +1,6 @@
 import React from 'react'
 import CustomTooltip from "../../components/Charts/CustomTooltip";
 import CustomLegend from "../../components/Charts/CustomLegend";
-
 import{
     PieChart,
     Pie,

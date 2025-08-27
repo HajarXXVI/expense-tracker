@@ -10,6 +10,7 @@ import {IoMdCard} from "react-icons/io";
 import {addThousandsSeperator} from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 import FinanceOverview from "../Dashboard/FinanceOverview";
+import ExpenseTransaction from "../../components/Dashboard/ExpenseTransaction";
 
 const Home = () => {
   useUserAuth();
@@ -71,7 +72,7 @@ const Home = () => {
           </div> */}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <RecentTransactions
+            {/* <RecentTransactions
               transactions = {dashboardData?.recentTransactions}
               onSeeMore = {() => navigate("/expense")}
             />
@@ -80,6 +81,15 @@ const Home = () => {
               totalBalance = {dashboardData?.totalBalance || 0}
               totalIncome = {dashboardData?.totalIncome || 0}
               totalExpense = {dashboardData?.totalExpense || 0}
+            /> */}
+
+            <ExpenseTransaction
+              transactions = {dashboardData?.last30DaysExpenses?.transactions || []}
+              onSeeMore = {() => navigate("/expense")}
+            />
+
+            <last30DaysExpenses
+              data = {dashboardData?.last30DaysExpenses?.transactions || []}
             />
           </div>
         </div>
