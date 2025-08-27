@@ -30,12 +30,25 @@ export const addThousandsSeperator = (num) => {
 };
 
 export const prepareExpenseBarChartData = (data = []) => {
-  const charData = data.map((item) => ({
-    category : item?.category,
-    amount : item?.amount,
+
+  const monthlyData = {};
+  
+  data.forEach((item) => {
+    const date = new Date(item?.date || item?.Date);
+    const monthKey = date.toLocaleDateString('en-US', { month: 'short' });
+    
+    if (!monthlyData[monthKey]) {
+      monthlyData[monthKey] = 0;
+    }
+    monthlyData[monthKey] += item?.amount || 0;
+  });
+
+  const chartData = Object.keys(monthlyData).map((month) => ({
+    month: month,
+    amount: monthlyData[month],
   }));
 
-  return charData;
+  return chartData;
 };
 
 export const prepareIncomeBarChartData = (data = []) => {
