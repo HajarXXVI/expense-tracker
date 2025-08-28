@@ -6,6 +6,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import ExpenseOverview from '../../components/Expense/ExpenseOverview';
 import AddExpenseForm from '../../components/Expense/AddExpenseForm';
 import Modal from '../../components/Modal';
+import toast from 'react-hot-toast';
 
 
 const Expense = () => {
@@ -98,6 +99,7 @@ const Expense = () => {
           <Modal
             isOpen={openAddExpenseModal}
             onClose={() => setOpenAddExpenseModal(false)}
+            title="Add Expense"
           >
             <AddExpenseForm onAddExpense={handleAddExpense} />
           </Modal>
@@ -106,4 +108,4 @@ const Expense = () => {
   )
 }
 
-export default Expense
+export default Expense;
