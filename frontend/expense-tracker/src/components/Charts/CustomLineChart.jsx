@@ -28,6 +28,7 @@ const CustomLineChart = ({data}) => {
                 <CartesianGrid stroke="none" />
                 <XAxis dataKey="month" tick={{fontSize: 12, fill: "#555"}} stroke="none"/>
                 <YAxis tick={{fontSize: 12, fill: "#555"}} stroke="none"/>
+                <Tooltip content={<CustomTooltip />} />
 
                 <Area type="monotone" dataKey="amount" stroke="#875cf5" fill="url(#incomeGradient)" strokeWidth={3} dot={{r: 3, fill: "#ab8df8"}} />
             </AreaChart>

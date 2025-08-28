@@ -31,21 +31,20 @@ export const addThousandsSeperator = (num) => {
 
 export const prepareExpenseBarChartData = (data = []) => {
 
-  const monthlyData = {};
+  const categoryData = {};
   
   data.forEach((item) => {
-    const date = new Date(item?.date || item?.Date);
-    const monthKey = date.toLocaleDateString('en-US', { month: 'short' });
+    const category = item?.category || 'Unknown';
     
-    if (!monthlyData[monthKey]) {
-      monthlyData[monthKey] = 0;
+    if (!categoryData[category]) {
+      categoryData[category] = 0;
     }
-    monthlyData[monthKey] += item?.amount || 0;
+    categoryData[category] += item?.amount || 0;
   });
 
-  const chartData = Object.keys(monthlyData).map((month) => ({
-    month: month,
-    amount: monthlyData[month],
+  const chartData = Object.keys(categoryData).map((category) => ({
+    category: category,
+    amount: categoryData[category],
   }));
 
   return chartData;
